@@ -1,18 +1,89 @@
 {
-    "editor.quickSuggestions": false, // Disable suggestions and pop-ups
-    "editor.suggestOnTriggerCharacters": false, // Disable suggestions triggered by typing
-    "editor.hover.enabled": true, // Keep hover information for class/object confirmation
-    "editor.parameterHints.enabled": true, // Keep parameter hints for function signatures
-    "editor.inlineSuggest.enabled": false, // Disable inline suggestions
-    "editor.suggest.showIcons": false, // Remove icons from IntelliSense suggestions
-    "editor.suggest.snippetsPreventQuickSuggestions": false, // Prevent snippets from triggering suggestions
-    "editor.suggest.showStatusBar": false, // Disable the status bar for suggestions
-    "editor.suggest.showWords": false, // Disable word-based suggestions
-    "editor.suggest.showKeywords": false, // Disable keyword suggestions
-    "editor.suggest.showFunctions": false, // Disable function suggestions
-    "editor.suggest.showClasses": false, // Disable class suggestions
-    "editor.suggest.showModules": false, // Disable module suggestions
-    "editor.suggest.showVariables": false, // Disable variable suggestions
-    "editor.suggest.showReferences": false, // Disable reference suggestions
-    "editor.suggest.showIssues": false // Disable issue suggestions
-  }
+  // Disable intrusive suggestions and pop-ups (keeping your preferences)
+  "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+  },
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.inlineSuggest.enabled": false,
+  "editor.hover.enabled": true,
+  "editor.parameterHints.enabled": true,
+  "editor.suggest.showIcons": false,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggest.showStatusBar": false,
+  "editor.suggest.showWords": false,
+  "editor.suggest.showKeywords": false,
+  "editor.suggest.showFunctions": false,
+  "editor.suggest.showClasses": false,
+  "editor.suggest.showModules": false,
+  "editor.suggest.showVariables": false,
+  "editor.suggest.showReferences": false,
+  "editor.suggest.showIssues": true,
+
+  // Enhance semantic highlighting
+  "editor.semanticHighlighting.enabled": true,
+  "editor.occurrencesHighlight": "singleFile", // Highlight all occurrences of a symbol
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+},
+
+  // Customize syntax highlighting with a more distinct palette
+  "editor.tokenColorCustomizations": {
+      "textMateRules": [
+          {
+              "scope": "variable.language",
+              "settings": {
+                  "foreground": "#5B9BD5" // Brighter blue for imports (more visible)
+              }
+          },
+          {
+              "scope": "entity.name.function",
+              "settings": {
+                  "foreground": "#7CC36D" // Brighter green for functions
+              }
+          },
+          {
+              "scope": "variable.other.readwrite",
+              "settings": {
+                  "foreground": "#C7A4FF" // Brighter lavender for variables
+              }
+          },
+          {
+              "scope": "invalid",
+              "settings": {
+                  "foreground": "#FF6666", // Brighter red for errors
+                  "fontStyle": "underline wavy", // Wavy underline for better error visibility
+                  "background": "#FFEEEE20" // Slight background tint to make errors pop
+              }
+          },
+          {
+              "scope": "comment",
+              "settings": {
+                  "foreground": "#239123" // Soft gray for comments (contextual clarity)
+              }
+          },
+          {
+              "scope": "keyword",
+              "settings": {
+                  "foreground": "#FFBB70" // Soft orange for keywords
+              }
+          }
+      ]
+  },
+
+  // Python-specific settings for Pylance
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "strict", // Stricter type checking for better error detection
+  "python.analysis.diagnosticSeverityOverrides": {
+      "reportUndefinedVariable": "error",
+      "reportMissingImports": "error",
+      "reportGeneralTypeIssues": "error", // Elevate type issues to errors
+      "reportOptionalMemberAccess": "warning", // Warn on potential None dereferences
+      "reportUnknownMemberType": "error" // Catch more semantic issues
+  },
+  "python.analysis.useLibraryCodeForTypes": true, // Improve type inference for libraries
+  "python.analysis.autoImportCompletions": false, // Avoid cluttering with auto-imports
+  "editor.rulers": [80], // Optional: Add a ruler for code readability
+  "editor.fontSize": 14 // Optional: Increase font size for visibility
+}
