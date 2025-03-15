@@ -6,3 +6,7 @@
 2025-03-15 20:31:08,731 - INFO - get_user_by_id finished - / - GET
 2025-03-15 20:31:36,356 - INFO - get_user_by_id called - / - GET
 2025-03-15 20:31:36,356 - INFO - get_user_by_id finished - / - GET
+2025-03-15 20:40:47,447 - INFO - get_user_by_id called - / - GET
+2025-03-15 20:40:47,447 - INFO - get_user_by_id finished - / - GET
+2025-03-15 20:40:48,656 - INFO - get_index called - / - GET
+2025-03-15 20:40:48,656 - INFO - get_index finished - / - GET
