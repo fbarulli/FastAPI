@@ -48,3 +48,27 @@ def patch_index():
         'method': 'patch',
         'endpoint': '/'
         }
+
+@api.get('/item/{itemid}')
+@logger.log_function
+def get_item(itemid):
+    return {
+        'route': 'dynamic',
+        'itemid': itemid
+        }
+    
+@api.get('/item/{itemid}/description/{language}')
+@logger.log_function
+def get_item_language(itemid, language):
+    if language == 'fr':
+        return {
+            'itemid': itemid,
+            'description': 'un objet',
+            'language': 'fr'
+        }
+    else:
+        return {
+            'itemid': itemid,
+            'description': 'an object',
+            'language': 'en'
+        }
