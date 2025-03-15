@@ -1,0 +1,18 @@
+{
+    "editor.quickSuggestions": false, // Disable suggestions and pop-ups
+    "editor.suggestOnTriggerCharacters": false, // Disable suggestions triggered by typing
+    "editor.hover.enabled": true, // Keep hover information for class/object confirmation
+    "editor.parameterHints.enabled": true, // Keep parameter hints for function signatures
+    "editor.inlineSuggest.enabled": false, // Disable inline suggestions
+    "editor.suggest.showIcons": false, // Remove icons from IntelliSense suggestions
+    "editor.suggest.snippetsPreventQuickSuggestions": false, // Prevent snippets from triggering suggestions
+    "editor.suggest.showStatusBar": false, // Disable the status bar for suggestions
+    "editor.suggest.showWords": false, // Disable word-based suggestions
+    "editor.suggest.showKeywords": false, // Disable keyword suggestions
+    "editor.suggest.showFunctions": false, // Disable function suggestions
+    "editor.suggest.showClasses": false, // Disable class suggestions
+    "editor.suggest.showModules": false, // Disable module suggestions
+    "editor.suggest.showVariables": false, // Disable variable suggestions
+    "editor.suggest.showReferences": false, // Disable reference suggestions
+    "editor.suggest.showIssues": false // Disable issue suggestions
+  }
