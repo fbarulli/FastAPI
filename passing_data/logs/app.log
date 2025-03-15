@@ -18,3 +18,7 @@
 2025-03-15 21:13:21,261 - INFO - get_user_by_name finished - / - GET
 2025-03-15 21:20:46,275 - INFO - get_sub_by_name called - / - GET
 2025-03-15 21:20:46,275 - INFO - get_sub_by_name finished - / - GET
+2025-03-15 21:35:12,386 - INFO - get_user called - / - GET
+2025-03-15 21:35:12,386 - INFO - get_user finished - / - GET
+2025-03-15 21:35:50,432 - INFO - get_addition called - / - GET
+2025-03-15 21:35:50,432 - INFO - get_addition finished - / - GET
