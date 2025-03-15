@@ -33,8 +33,8 @@ class User(BaseModel):
 users_db = [User(**user) for user in users_db]
 
 
-@app.get('/user/{user_id:int}/')
+@app.get('/user/{user_id}')
 @logger.log_function
 def get_user_by_id(user_id: int) -> Optional[User]:
-    result = [user for user in users_db if user['user_id'] == user_id]
+    result = [user for user in users_db if user.user_id == user_id]
     return result[0] if result else None
