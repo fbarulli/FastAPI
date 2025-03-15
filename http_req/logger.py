@@ -1,6 +1,8 @@
 import logging
 import os
 from functools import wraps
+from typing import Callable, Any
+
 
 log_dir = "logs"
 os.makedirs(log_dir, exist_ok=True)
@@ -17,12 +19,12 @@ class TextLogger:
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         
-    def log_function(self, func):
+    def log_function(self, func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs):
-            self.logger.info(f"{func.__name__} was called", extra={"endpoint": "/", "method": "GET"})
-            result = func(*args, **kwargs)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            self.logger.info(f"{func.__name__} called", extra={"endpoint": "/", "method": "GET"})
             self.logger.info(f"{func.__name__} finished", extra={"endpoint": "/", "method": "GET"})
+            result = func(*args, **kwargs)
             return result
         return wrapper
 

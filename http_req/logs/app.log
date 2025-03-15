@@ -1,2 +1,22 @@
 2025-03-15 15:48:59,999 - INFO - get_index was called - / - GET
 2025-03-15 15:48:59,999 - INFO - get_index finished - / - GET
+2025-03-15 16:00:34,859 - INFO - get_index was called - / - GET
+2025-03-15 16:00:34,860 - INFO - get_index finished - / - GET
+2025-03-15 16:01:02,389 - INFO - get_index was called - / - GET
+2025-03-15 16:01:02,389 - INFO - get_index finished - / - GET
+2025-03-15 16:01:08,065 - INFO - get_index was called - / - GET
+2025-03-15 16:01:08,065 - INFO - get_index finished - / - GET
+2025-03-15 16:01:23,075 - INFO - post_index was called - / - GET
+2025-03-15 16:01:23,075 - INFO - post_index finished - / - GET
+2025-03-15 16:01:34,618 - INFO - put_index was called - / - GET
+2025-03-15 16:01:34,618 - INFO - put_index finished - / - GET
+2025-03-15 16:01:57,114 - INFO - delete_index was called - / - GET
+2025-03-15 16:01:57,114 - INFO - delete_index finished - / - GET
+2025-03-15 16:02:05,670 - INFO - patch_index was called - / - GET
+2025-03-15 16:02:05,670 - INFO - patch_index finished - / - GET
+2025-03-15 16:02:15,856 - INFO - get_other was called - / - GET
+2025-03-15 16:02:15,856 - INFO - get_other finished - / - GET
+2025-03-15 16:13:44,076 - INFO - get_other called - / - GET
+2025-03-15 16:13:44,076 - INFO - get_other finished - / - GET
+2025-03-15 16:17:16,647 - INFO - get_other called - / - GET
+2025-03-15 16:17:16,647 - INFO - get_other finished - / - GET
