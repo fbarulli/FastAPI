@@ -25,9 +25,13 @@ class TextLogger:
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         
-    def log_function(self,func):
+    def log_function(self, func):
         @wraps(func)                        #preservers original func metadata
-        self.logger.info(f"{func.__name__} was called", extra)
         def wrapper(*args, **kwargs):
+            self.logger.info(f"{func.__name__} was called", extra={"endpoint" : "/","method": "GET" })
+            result = func(*args, **kwargs)
+            logger.logger.info(f"{func.__name__} was called", extra={"endpoint": "/", "method": "GET"})
             return func(*args, **kwargs)
+        
+
 logger : TextLogger = TextLogger()
