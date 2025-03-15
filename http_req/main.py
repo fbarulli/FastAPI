@@ -1,4 +1,6 @@
+import os
 from fastapi import FastAPI
+import traceback
 
 api = FastAPI()
 
