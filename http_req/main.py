@@ -1,19 +1,6 @@
 from logger import logger
 from fastapi import FastAPI
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 api = FastAPI()
 
 
