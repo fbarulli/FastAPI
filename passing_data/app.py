@@ -1,4 +1,9 @@
 # passing_data/app.py
+
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import FastAPI
 from data import User, users_db  
 from http_req.logger import logger  
@@ -50,3 +55,12 @@ def get_addition(a: int, b: Optional[int]=None):
     }
     
 #  Headers
+from fastapi import Header
+
+@app.get('/headers')
+# pylint: disable=dangerous-default-value
+# pyright: ignore
+async def get_headers(user_agent: str | None = Header(None)):  # type: ignore
+    return {
+        'User-Agent': user_agent
+    }
