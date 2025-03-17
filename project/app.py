@@ -1,16 +1,33 @@
+# app.py
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from fastapi import FastAPI, HTTPException
+from project.logger import TextLogger as logger
+from project.data.data import Question, questions
+from typing import List, Dict, Any
 
-from fastapi import FastAPI
-from http_req.logger import logger  
-from data import Question, data
+
 app = FastAPI()
 
 
 
-# /question?use=exam&subject=math
+
+
+
+
+
+
+# /questions
 @app.get("/questions")
-async def get_all_questions(use: str = None):
-    return {"questions" : }
+@logger.log_function
+async def get_all_questions() -> Dict[str, Any]:
+    '''
+    returns : dict with all questions
+    '''
+    try:
+        return {"questions": questions}
+    except Exception as e:
+        error_msg = f"Failed {str(e)}"
+        raise HTTPException(status_code=500, detail=error_msg)
