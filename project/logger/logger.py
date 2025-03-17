@@ -20,13 +20,15 @@ class TextLogger:
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         
-    def log_function(self, func: Callable[..., Any]) -> Callable[..., Any]:
-        @wraps(func)
-        async def wrapper(*args: Any, **kwargs: Any) -> Any:
-            self.logger.info(f"{func.__name__} called", extra={"endpoint": "/", "method": "GET"})
-            self.logger.info(f"{func.__name__} finished", extra={"endpoint": "/", "method": "GET"})
-            result = await func(*args, **kwargs)
-            return result
-        return wrapper
-
+    def log_function(self):
+        def decorator(func: Callable[..., Any])->Callable[..., Any]:
+            @wraps(func)
+            async def wrapper(*args: Any, **kwargs: Any)-> Any:
+                self.logger.info(f"{func.__name__} called", extra={"endpoint": "/", "method": "GET"})
+                self.logger.info(f"{func.__name__} finished", extra={"endpoint": "/", "method": "GET"})
+                result = await func(*args, **kwargs)
+                return result
+            return wrapper
+        return decorator
+                
 logger: TextLogger = TextLogger()
