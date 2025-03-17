@@ -1,20 +1,9 @@
 # app.py
 import sys
 import os
-#sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-
-
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("sys.path:", sys.path)  # Debug line
 print("Current dir:", os.getcwd())  # Debug line
-
-
-
-
-
-
-
-
 from fastapi import FastAPI, HTTPException
 from project.logger.logger import TextLogger as logger
 from project.data.data import Question, questions
