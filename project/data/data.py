@@ -1,9 +1,9 @@
 import os
 import pandas as pd
 from pydantic import BaseModel, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, cast
 
-# Get path to the Excel file
+
 cwd = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(cwd, "questions_en.xlsx")
 
@@ -22,11 +22,19 @@ class Question(BaseModel):
         validate_assignment = True
 
 
-df = pd.read_excel(data_path)  # type: ignore
+df: pd.DataFrame = pd.read_excel(data_path, dtype=str)
 
 
-records = df.replace({pd.NA: None}).to_dict(orient="records")  # type: ignore
+df = df.fillna('')
 
+
+records: List[Dict[str, Any]] = cast(
+    List[Dict[str, Any]], 
+    df.to_dict(orient="records")
+)
+
+
+print("First record:", records[0] if records else "No records found")
 
 questions = [Question.model_validate(record) for record in records]
 
