@@ -38,7 +38,6 @@ app = FastAPI()
 
 
 
-
 # /questions
 @app.get("/questions")
 @logger.log_function
