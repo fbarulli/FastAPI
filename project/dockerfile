@@ -1,0 +1,17 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y gcc wget
+
+RUN mkdir -p data && \
+    wget -O data/questions_en.xlsx https://dst-de.s3.eu-west-3.amazonaws.com/fastapi_en/questions_en.xlsx
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
