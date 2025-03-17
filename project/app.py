@@ -1,69 +1,71 @@
+# app.py
 from fastapi import FastAPI, HTTPException
-from project.data.data import questions
-from typing import List
+from project.data.data import questions, Question
+from typing import List, Dict, Any, Optional, cast
+from pandas import DataFrame
 
-app = FastAPI()  
+app = FastAPI()
 
-#!curl -X GET "http://127.0.0.1:8000/questions"
-@app.get("/questions") 
-async def get_all_questions():     
-    '''     
-    returns : dict with all questions     
-    '''
+@app.get("/questions", response_model=Dict[str, List[Dict[str, Any]]])
+async def get_all_questions() -> Dict[str, List[Dict[str, Any]]]:
+    """
+    curl -X GET "http://127.0.0.1:8000/questions"
+    """
     try:
-        return {"questions": [q.model_dump() for q in questions]}
+        df = Question.to_dataframe(questions)
+        records = cast(List[Dict[str, Any]], df.to_dict(orient="records"))
+        return {"questions": records}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get questions: {str(e)}")
 
-
-# !curl -X GET "http://127.0.0.1:8000/questions/use"
-@app.get("/questions/use") 
-async def get_all_uses():     
-    '''     
-    returns : dict with all uses     
-    '''
+@app.get("/questions/use", response_model=Dict[str, List[str]])
+async def get_all_uses() -> Dict[str, List[str]]:
+    """
+    curl -X GET "http://127.0.0.1:8000/questions/use"
+    """
     try:
-        unique_uses = list(set(q.use for q in questions))
+        df = Question.to_dataframe(questions)
+        unique_uses = list(df['use'].unique().tolist())
         return {"uses": unique_uses}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get uses: {str(e)}")
 
-# !curl -X GET "http://127.0.0.1:8000/questions/Validation%20test"
-@app.get('/questions/{use}') 
-async def get_questions_by_use(use: str):     
-    '''     
-    returns : dict filtered by use     
-    '''
+@app.get("/questions/subject", response_model=Dict[str, List[str]])
+async def get_all_subjects() -> Dict[str, List[str]]:
+    """
+    curl -X GET "http://127.0.0.1:8000/questions/subject"
+    """
     try:
-        questions_by_use = [q.model_dump() for q in questions if q.use == use]
-        return {"questions_by_use": questions_by_use}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get questions by use: {str(e)}")
-    
-@app.get("/questions/")
-async def get_subjects(subjects: List[str]):
-    '''
-    Returns: dict with questions for the specified subjects
-    Requires: At least one subject to be provided via query parameters
-    Example: /questions/?subjects=math&subjects=science
-    '''
-    try:
-        # Convert subjects to lowercase for case-insensitive comparison
-        subjects_set = set(map(str.lower, subjects))
-
-        # Filter questions by subjects using a set intersection and dict grouping
-        matching_subjects = {
-            subj: list(filter(lambda q: eq(q.subject.lower(), subj.lower()), questions))
-            for subj in subjects_set
-        }
-
-        # Convert question objects to dictionaries for the response
-        result = {subj: [q.__dict__ for q in qs] for subj, qs in matching_subjects.items()}
-
-        # Check if any subjects matched
-        if not any(result.values()):
-            raise HTTPException(status_code=404, detail="No matching subjects found")
-
-        return {"subjects": result}
+        df = Question.to_dataframe(questions)
+        unique_subjects = list(df['subject'].unique().tolist())
+        return {"subject": unique_subjects}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get subjects: {str(e)}")
+
+@app.get('/questions/filter', response_model=Dict[str, List[Dict[str, Any]]])
+async def filter_questions(subjects: Optional[List[str]] = None) -> Dict[str, List[Dict[str, Any]]]:
+    """
+    curl -X GET "http://127.0.0.1:8000/questions/filter?subjects=Math&subjects=Science"
+    """
+    try:
+        df = Question.to_dataframe(questions)
+        if subjects:
+            df = df[df['subject'].isin(subjects)]
+        records = cast(List[Dict[str, Any]], df.to_dict(orient="records"))
+        return {"filtered_questions": records}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to filter questions: {str(e)}")
+
+@app.get('/questions/{use}', response_model=Dict[str, List[Dict[str, Any]]])
+async def get_questions_by_use(use: str) -> Dict[str, List[Dict[str, Any]]]:
+    """
+    curl -X GET "http://127.0.0.1:8000/questions/{use}"
+    Example: curl -X GET "http://127.0.0.1:8000/questions/Validation%20test"
+    """
+    try:
+        df = Question.to_dataframe(questions)
+        filtered_df = df[df['use'] == use]
+        records = cast(List[Dict[str, Any]], filtered_df.to_dict(orient="records"))
+        return {"questions_by_use": records}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get questions by use: {str(e)}")
